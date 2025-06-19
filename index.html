@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: Kế Hoạch Khám Phá Nam Cát Tiên 2N1Đ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!--
+    INFOGRAPHIC PLAN
+
+    NARRATIVE FLOW: This infographic guides a user through planning a 2-day trip to Nam Cat Tien, following the structure of the source material. It starts with a hook, presents key choices (transport, stay), details the day-by-day itinerary, breaks down the budget, and ends with extra tips. The goal is to be a visual, one-stop guide.
+
+    STRUCTURE:
+    1.  Hero Section: Title, catchy subtitle ("Cẩm Nang Khám Phá Nam Cát Tiên 2N1Đ"), and key stats (2 Days, <1.5M VND, "Chữa Lành").
+    2.  Transportation Showdown: A side-by-side comparison of Motorbike vs. Bus options. This will be a two-column layout.
+    3.  Accommodation Guide: A section featuring the top 3 recommended homestays, presented as cards with key data points.
+    4.  The 2-Day Journey (Timeline): A visually engaging timeline created with HTML/CSS to show the schedule for Day 1 and the two options for Day 2.
+    5.  Budget Breakdown: The centerpiece. A donut chart will visualize the cost distribution for the "Budget" option, followed by a bar chart comparing the total cost of the "Budget" vs. "Max" scenarios.
+    6.  Taste of the Jungle: A visually appealing section showcasing the top 3 must-try dishes.
+    7.  Pro-Tips & Safety: A final section with "Hidden Gems" and emergency contact info.
+
+    COLOR PALETTE: "Energetic & Playful" from the provided image. HEX Codes: #FF6B6B (Coral), #FFD166 (Yellow), #06D6A0 (Green), #118AB2 (Blue), #073B4C (Dark Blue/Text). This palette is vibrant and suits the "healing" and "adventure" theme of the trip.
+
+    CONFIRMATION: NO Mermaid JS and NO SVG graphics will be used in this output. All charts will be rendered on Canvas by Chart.js. All diagrams (timeline, comparisons) will be built with structured HTML and styled with Tailwind CSS.
+    -->
+    <!--
+    VISUALIZATION SELECTION
+
+    1.  Transportation Comparison:
+        * Data: Two distinct options (Motorbike, Bus) with pros/cons, costs, time.
+        * Goal: Compare.
+        * Chosen Viz: Two-column layout using HTML/CSS (Flexbox/Grid). Each column is a "card" for one option. Use Unicode icons (🏍️, 🚌) to add visual appeal.
+        * Justification: A simple side-by-side comparison is the clearest way to present two distinct choices. No complex chart is needed. (Method: HTML/CSS, NO SVG).
+
+    2.  Accommodation Ranking:
+        * Data: Top 3 homestays with features, price, reviews.
+        * Goal: Organize/Compare.
+        * Chosen Viz: A three-card layout using HTML/CSS. Each card highlights the homestay's name, key feature, and price range.
+        * Justification: Cards allow for structured, digestible information for each item being compared. (Method: HTML/CSS, NO SVG).
+
+    3.  Itinerary Timeline:
+        * Data: Sequential events over two days.
+        * Goal: Show Change (over time).
+        * Chosen Viz: A vertical timeline built with HTML/CSS. A central line with "nodes" branching off for each event.
+        * Justification: This is the classic, intuitive way to represent a schedule. It clearly shows the flow of events. (Method: HTML/CSS, NO SVG, NO MERMAID).
+
+    4.  Budget Breakdown (Budget Option):
+        * Data: Proportions of total cost (Transportation, Accommodation, Food, Tickets).
+        * Goal: Compare (show composition).
+        * Chosen Viz: Donut Chart (Chart.js).
+        * Justification: A donut chart is perfect for showing how parts make up a whole, immediately highlighting the biggest expense categories. (Library: Chart.js/Canvas, NO SVG).
+
+    5.  Budget Comparison (Budget vs. Max):
+        * Data: Two total cost figures (1,230,000 VND vs. 1,660,000 VND).
+        * Goal: Compare.
+        * Chosen Viz: Vertical Bar Chart (Chart.js).
+        * Justification: A bar chart provides a direct, powerful visual comparison between two absolute values. (Library: Chart.js/Canvas, NO SVG).
+
+    6.  Must-Try Foods:
+        * Data: List of 3 dishes with descriptions.
+        * Goal: Inform.
+        * Chosen Viz: Icon-based list using HTML/CSS. Each item will have a food-related Unicode icon (🍲, 🍗) and a short description in a card-like element.
+        * Justification: A simple, visually appealing list is sufficient to present this information without over-complicating it. (Method: HTML/CSS, NO SVG).
+    -->
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #F8F9FA;
+            color: #073B4C;
+        }
+        .text-coral { color: #FF6B6B; }
+        .bg-coral { background-color: #FF6B6B; }
+        .border-coral { border-color: #FF6B6B; }
+
+        .text-yellow { color: #FFD166; }
+        .bg-yellow { background-color: #FFD166; }
+        .border-yellow { border-color: #FFD166; }
+        
+        .text-green { color: #06D6A0; }
+        .bg-green { background-color: #06D6A0; }
+        .border-green { border-color: #06D6A0; }
+        
+        .text-blue { color: #118AB2; }
+        .bg-blue { background-color: #118AB2; }
+        .border-blue { border-color: #118AB2; }
+
+        .text-dark-blue { color: #073B4C; }
+        .bg-dark-blue { background-color: #073B4C; }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2.5rem;
+        }
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #118AB2;
+            border: 4px solid #F8F9FA;
+            z-index: 10;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 25px;
+            bottom: 0;
+            width: 2px;
+            background-color: #118AB2;
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 md:p-8">
+
+        <header class="text-center py-12">
+            <h1 class="text-4xl md:text-6xl font-black text-dark-blue mb-4 leading-tight">Cẩm Nang Khám Phá <span class="text-green">Nam Cát Tiên</span></h1>
+            <p class="text-xl md:text-2xl font-medium text-blue">Lịch trình chi tiết 2 ngày 1 đêm cho chuyến đi "chữa lành"</p>
+            
+            <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="bg-white p-4 rounded-xl shadow-md border-t-4 border-coral">
+                    <p class="text-3xl font-bold text-coral">2</p>
+                    <p class="text-sm text-dark-blue">Ngày</p>
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-md border-t-4 border-yellow">
+                    <p class="text-3xl font-bold text-yellow">1</p>
+                    <p class="text-sm text-dark-blue">Đêm</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-md border-t-4 border-green">
+                    <p class="text-3xl font-bold text-green">&lt;1.5<span class="text-xl">tr</span></p>
+                    <p class="text-sm text-dark-blue">Chi phí/người</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-md border-t-4 border-blue">
+                    <p class="text-3xl font-bold text-blue">6</p>
+                    <p class="text-sm text-dark-blue">Người</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="py-12">
+            <h2 class="text-3xl font-bold text-center mb-10 text-dark-blue">Chọn Phương Tiện: Phượt Thủ Hay An Nhàn?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold text-coral mb-4 flex items-center"><span class="text-4xl mr-3">🏍️</span> Xe Máy</h3>
+                    <p class="mb-4">Dành cho những tâm hồn yêu tự do, muốn chinh phục cung đường và chủ động về thời gian.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start"><span class="text-green font-bold mr-2">✔</span> <strong>Quãng đường:</strong> ~160 km</li>
+                        <li class="flex items-start"><span class="text-green font-bold mr-2">✔</span> <strong>Thời gian:</strong> 3.5 - 4 giờ</li>
+                        <li class="flex items-start"><span class="text-green font-bold mr-2">✔</span> <strong>Chi phí:</strong> Siêu tiết kiệm, ~200.000đ/người</li>
+                        <li class="flex items-start"><span class="text-coral font-bold mr-2">✘</span> Đòi hỏi sức khỏe và tay lái vững.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold text-blue mb-4 flex items-center"><span class="text-4xl mr-3">🚌</span> Xe Khách</h3>
+                    <p class="mb-4">Lựa chọn lý tưởng để giữ sức, an toàn và thoải mái, đặc biệt cho các nhóm không quen đi xa.</p>
+                     <ul class="space-y-2">
+                        <li class="flex items-start"><span class="text-green font-bold mr-2">✔</span> <strong>Nhà xe gợi ý:</strong> Kim Hoàn, Bé (đi thẳng)</li>
+                        <li class="flex items-start"><span class="text-green font-bold mr-2">✔</span> <strong>Giá vé:</strong> 90.000 - 120.000đ/chiều</li>
+                        <li class="flex items-start"><span class="text-green font-bold mr-2">✔</span> An toàn, thoải mái, giữ sức khỏe.</li>
+                        <li class="flex items-start"><span class="text-coral font-bold mr-2">✘</span> Ít chủ động, có thể phải trung chuyển.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12">
+            <h2 class="text-3xl font-bold text-center mb-10 text-dark-blue">Chọn "Trú Ẩn" Giữa Đại Ngàn</h2>
+            <p class="text-center max-w-3xl mx-auto mb-10">Khu vực bên ngoài VQG dọc bờ sông Đồng Nai là lựa chọn tối ưu về chi phí và trải nghiệm. Dưới đây là 3 homestay/lodge được đánh giá cao nhất cho nhóm bạn.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden text-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-green mb-2">Green Hope Lodge</h3>
+                        <p class="text-sm mb-4">"View sông tuyệt đẹp, không gian yên tĩnh, đồ ăn cực kỳ ngon."</p>
+                        <p class="text-lg font-bold text-blue">800k - 1.2tr/đêm</p>
+                    </div>
+                </div>
+                 <div class="bg-white rounded-xl shadow-lg overflow-hidden text-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-yellow mb-2">Gibbon Singing</h3>
+                        <p class="text-sm mb-4">"Cảm giác 'nhà vườn' ấm cúng, chủ nhà thân thiện, BBQ đáng tiền."</p>
+                        <p class="text-lg font-bold text-blue">800k - 1.2tr/đêm</p>
+                    </div>
+                </div>
+                 <div class="bg-white rounded-xl shadow-lg overflow-hidden text-center">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-coral mb-2">Forest Side Ecolodge</h3>
+                        <p class="text-sm mb-4">"Vị trí siêu gần bến phà, chủ nhà nhiệt tình, giá cả hợp lý."</p>
+                        <p class="text-lg font-bold text-blue">600k - 1tr/đêm</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12">
+            <h2 class="text-3xl font-bold text-center mb-10 text-dark-blue">Hành Trình 2 Ngày 1 Đêm</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-x-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-blue mb-6">Ngày 1: Chạm Ngõ Rừng Già</h3>
+                    <div class="relative">
+                        <div class="timeline-item">
+                            <h4 class="font-bold">05:30</h4>
+                            <p class="text-sm">Xuất phát từ TP.HCM</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-bold">11:00</h4>
+                            <p class="text-sm">Đến Nam Cát Tiên, nhận phòng homestay & ăn trưa</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-bold">14:00</h4>
+                            <p class="text-sm">Đạp xe khám phá rừng (Cây Tung, Ghềnh Bến Cự)</p>
+                        </div>
+                         <div class="timeline-item">
+                            <h4 class="font-bold">18:30</h4>
+                            <p class="text-sm">Trải nghiệm Tour Xem Thú Đêm độc đáo</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-bold">20:00</h4>
+                            <p class="text-sm">Ăn tối tại homestay và nghỉ ngơi</p>
+                        </div>
+                    </div>
+                </div>
+                 <div>
+                    <h3 class="text-2xl font-bold text-coral mb-6">Ngày 2: Hít Thở Khí Trời</h3>
+                    <p class="mb-6">Buổi sáng ngày 2 mang đến hai lựa chọn với hai phong cách trải nghiệm hoàn toàn khác nhau.</p>
+                    <div class="bg-green/10 p-6 rounded-xl border-l-4 border-green mb-6">
+                        <h4 class="font-bold text-green">Phương án A: Mạo Hiểm</h4>
+                        <p class="text-sm">Trekking 5km xuyên rừng đến Bàu Sấu - "trái tim" của VQG, ngắm cá sấu Xiêm trong môi trường tự nhiên. Chi phí cao hơn và đòi hỏi thể lực.</p>
+                    </div>
+                    <div class="bg-yellow/10 p-6 rounded-xl border-l-4 border-yellow">
+                        <h4 class="font-bold text-yellow-600">Phương án B: Thư Giãn</h4>
+                        <p class="text-sm">Chèo Kayak trên sông Đồng Nai yên ả, sau đó ghé thăm Làng Tà Lài để tìm hiểu văn hóa bản địa của người Mạ, S'tiêng.</p>
+                    </div>
+                     <div class="relative mt-6">
+                        <div class="timeline-item">
+                            <h4 class="font-bold">11:30</h4>
+                            <p class="text-sm">Trả phòng homestay</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-bold">13:30</h4>
+                            <p class="text-sm">Lên xe trở về TP.HCM, kết thúc hành trình</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 bg-white rounded-2xl shadow-inner">
+            <h2 class="text-3xl font-bold text-center mb-2 text-dark-blue">"Hầu Bao" Cho Chuyến Đi</h2>
+            <p class="text-center max-w-3xl mx-auto mb-10">Với ngân sách dưới 1.500.000 VNĐ, bạn hoàn toàn có thể có một chuyến đi trọn vẹn. Dưới đây là phân tích chi phí cho lựa chọn tiết kiệm và so sánh với lựa chọn tối đa.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-center">
+                    <h3 class="text-xl font-bold mb-4">Phân Bổ Chi Phí (Phương án Tiết Kiệm)</h3>
+                    <div class="chart-container">
+                        <canvas id="budgetDonutChart"></canvas>
+                    </div>
+                </div>
+                <div class="text-center">
+                     <h3 class="text-xl font-bold mb-4">So Sánh Tổng Chi Phí 2 Phương Án</h3>
+                    <div class="chart-container">
+                        <canvas id="budgetBarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+             <p class="text-center text-sm mt-8 text-gray-500">Kịch bản Tiết kiệm chọn Chèo Kayak/Thăm làng Tà Lài vào ngày 2, trong khi kịch bản Tối đa chọn Trekking Bàu Sấu, dẫn đến chi phí vé & dịch vụ cao hơn.</p>
+        </section>
+
+        <section class="py-12">
+            <h2 class="text-3xl font-bold text-center mb-10 text-dark-blue">Hương Vị Núi Rừng Không Thể Bỏ Lỡ</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                    <p class="text-6xl mb-4">🍲</p>
+                    <h3 class="font-bold text-lg text-coral">Lẩu Cá Sông Rau Rừng</h3>
+                    <p class="text-sm">Tinh hoa hội tụ sản vật của sông và rừng, với vị ngọt của cá và hương vị độc đáo của các loại rau rừng.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                    <p class="text-6xl mb-4">🍗</p>
+                    <h3 class="font-bold text-lg text-yellow">Cơm Lam - Gà Nướng</h3>
+                    <p class="text-sm">Gà ta da giòn, thịt ngọt ăn cùng cơm lam dẻo thơm nấu trong ống tre, đậm đà hương vị núi rừng.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                    <p class="text-6xl mb-4">🥣</p>
+                    <h3 class="font-bold text-lg text-green">Canh Lục Bình</h3>
+                    <p class="text-sm">Đặc sản dân dã nhưng độc đáo, có vị ngọt thanh, mát lành, giúp giải nhiệt và rất đưa cơm.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center py-10 border-t mt-12">
+             <h3 class="text-xl font-bold text-blue mb-4">Lưu ý An Toàn & Khẩn Cấp</h3>
+             <p class="max-w-2xl mx-auto text-sm">
+                Tháng 7 là mùa mưa, hãy chuẩn bị trang phục nhanh khô, giày trekking chống trượt, thuốc chống vắt và túi chống nước.
+                <br>
+                <strong>Hotline VQG Cát Tiên:</strong> (+84) 2513 669 228
+                <br>
+                Tuyệt đối không đi vào rừng một mình sau 18:00 và không xả rác.
+             </p>
+             <p class="mt-8 text-xs text-gray-400">Infographic được tạo bởi Canvas. Dữ liệu dựa trên cẩm nang chi tiết được cung cấp.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function wrapLabel(str, maxLen = 16) {
+            if (typeof str !== 'string' || str.length <= maxLen) {
+                return str;
+            }
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).length > maxLen && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = currentLine ? currentLine + ' ' + word : word;
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        const donutChartCtx = document.getElementById('budgetDonutChart').getContext('2d');
+        new Chart(donutChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Ăn uống', 'Vé & Dịch vụ', 'Di chuyển', 'Lưu trú'],
+                datasets: [{
+                    label: 'Chi phí',
+                    data: [550000, 310000, 200000, 170000],
+                    backgroundColor: [
+                        '#118AB2', 
+                        '#06D6A0',
+                        '#FFD166',
+                        '#FF6B6B',
+                    ],
+                    borderColor: '#F8F9FA',
+                    borderWidth: 4,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: { family: "'Be Vietnam Pro', sans-serif" }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+
+        const barChartCtx = document.getElementById('budgetBarChart').getContext('2d');
+        new Chart(barChartCtx, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabel('Phương án Tiết kiệm'), wrapLabel('Phương án Tối đa')],
+                datasets: [{
+                    label: 'Tổng chi phí',
+                    data: [1230000, 1660000],
+                    backgroundColor: ['#06D6A0', '#FF6B6B'],
+                    borderRadius: 8,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback,
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value, index, ticks) {
+                                return value / 1000000 + 'tr';
+                            }
+                        }
+                    },
+                     x: {
+                        ticks: {
+                           font: { size: 14, family: "'Be Vietnam Pro', sans-serif" }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
