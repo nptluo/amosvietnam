@@ -10,17 +10,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet">
     <!--
-    DESIGN PHILOSOPHY V2: Interactive Depth
+    DESIGN PHILOSOPHY V5: Text-Only Focus
 
-    THEME: Minimal Dark with Vibrant Gradients, enhanced with interactivity.
-    INTERACTIVITY: Core information is presented upfront. Detailed data (routes, prices, contacts, descriptions) is hidden within modals, revealed upon user interaction (click/tap). This keeps the main view clean and minimal while providing rich content on demand.
+    THEME: Maintained from previous version.
+    UPDATE: Removed all image elements from modals to prevent broken links and ensure stability. The focus is now 100% on interactive text-based information.
     
-    PALETTE:
-    - Background: #0D0D0D
-    - Primary Text: #E0E0E0
-    - Secondary Text: #A0A0A0
-    - Gradient: #A855F7 (Purple) -> #EC4899 (Pink) -> #F59E0B (Amber)
-
     CONFIRMATION: NO Mermaid JS and NO SVG graphics are used. Charts by Chart.js. All pop-ups and layouts by HTML/CSS/JS.
     -->
     <style>
@@ -28,6 +22,7 @@
             font-family: 'Be Vietnam Pro', sans-serif;
             background-color: #0D0D0D;
             color: #E0E0E0;
+            scroll-behavior: smooth;
         }
         .gradient-text {
             background: linear-gradient(90deg, #A855F7, #EC4899, #F59E0B);
@@ -47,7 +42,6 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(236, 72, 153, 0.15);
         }
-        /* Modal Styles */
         .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background-color: rgba(0, 0, 0, 0.7);
@@ -62,12 +56,17 @@
         }
         .modal-content {
             background: #111111;
-            padding: 2rem; border-radius: 1.5rem;
+            padding: 1.5rem; border-radius: 1.5rem;
             width: 90%; max-width: 600px;
             max-height: 90vh; overflow-y: auto;
             border: 1px solid rgba(255, 255, 255, 0.2);
             transform: scale(0.9);
             transition: transform 0.4s ease;
+        }
+        @media (min-width: 768px) {
+            .modal-content {
+                padding: 2rem;
+            }
         }
         .modal-overlay.active .modal-content {
             transform: scale(1);
@@ -78,6 +77,7 @@
             width: 2.5rem; height: 2.5rem;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer; color: white; font-size: 1.5rem;
+            z-index: 10;
         }
         .timeline-item {
             position: relative; padding-bottom: 2.5rem; padding-left: 2.5rem;
@@ -140,7 +140,7 @@
         </section>
 
         <section class="py-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Hành Trình 2 Ngày 1 Đêm</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Lịch Trình 2 Ngày 1 Đêm</h2>
             <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-x-12">
                 <div>
                     <h3 class="text-2xl font-bold text-white mb-6">Ngày 1: Chạm Ngõ Rừng Già</h3>
@@ -156,8 +156,28 @@
                     <div class="relative">
                         <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-line"></div><h4 class="font-bold">07:00 - Lựa chọn trải nghiệm</h4><p class="text-sm text-gray-400">Nhấn vào các phương án bên dưới để xem chi tiết.</p></div>
                         <div class="p-4 glassmorphism rounded-lg mb-4 interactive-card" onclick="openModal('modal-bau-sau')"><h5 class="font-bold text-pink-400">A: Trekking Bàu Sấu</h5><p class="text-xs text-gray-400">Mạo hiểm & đáng giá.</p></div>
-                        <div class="p-4 glassmorphism rounded-lg interactive-card" onclick="openModal('modal-kayak')"><h5 class="font-bold text-amber-400">B: Chèo Kayak & Làng Tà Lài</h5><p class="text-xs text-gray-400">Thư giãn & khám phá văn hóa.</p></div>
+                        <div class="p-4 glassmorphism rounded-lg mb-4 interactive-card" onclick="openModal('modal-kayak')"><h5 class="font-bold text-amber-400">B: Chèo Kayak & Làng Tà Lài</h5><p class="text-xs text-gray-400">Thư giãn & khám phá văn hóa.</p></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-line"></div><h4 class="font-bold">11:30</h4><p class="text-sm text-gray-400">Trả phòng & ăn trưa</p></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-line"></div><h4 class="font-bold">13:30</h4><p class="text-sm text-gray-400">Lên xe trở về TP.HCM</p></div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Góc Sống Ảo & Bí Mật</h2>
+             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <div class="glassmorphism p-4 rounded-xl text-center interactive-card" onclick="openModal('modal-san-buom')">
+                    <h3 class="text-md font-bold text-white">Săn Bướm Rừng</h3>
+                </div>
+                <div class="glassmorphism p-4 rounded-xl text-center interactive-card" onclick="openModal('modal-binh-minh')">
+                    <h3 class="text-md font-bold text-white">Bình Minh Sông</h3>
+                </div>
+                 <div class="glassmorphism p-4 rounded-xl text-center interactive-card" onclick="openModal('modal-vi-mo')">
+                    <h3 class="text-md font-bold text-white">Thế Giới Vi Mô</h3>
+                </div>
+                <div class="glassmorphism p-4 rounded-xl text-center interactive-card" onclick="openModal('modal-ta-lai')">
+                    <h3 class="text-md font-bold text-white">Văn Hóa Tà Lài</h3>
                 </div>
             </div>
         </section>
@@ -178,75 +198,55 @@
     </div>
 
     <!-- MODALS -->
-    <div id="modal-xe-may" class="modal-overlay">
-        <div class="relative modal-content">
-            <h3 class="text-2xl font-bold gradient-text mb-4">Chi Tiết Di Chuyển Bằng Xe Máy</h3>
-            <div class="space-y-4 text-gray-300">
-                <div><h4 class="font-bold text-white">Lộ trình đề xuất (~160km, 4 giờ):</h4><p class="text-sm">Bình Thạnh → QL1A → Ngã ba Dầu Giây (rẽ trái) → QL20 → Ngã ba Tà Lài (rẽ trái) → Cổng VQG Cát Tiên. <br><strong class="text-pink-400">Lưu ý:</strong> Nhớ nói rõ là "VQG Cát Tiên, Đồng Nai" để tránh nhầm đường.</p></div>
-                <div><h4 class="font-bold text-white">Điểm dừng chân gợi ý (Long Khánh):</h4><p class="text-sm">• **Én Coffee:** Phong cách Hy Lạp, điểm check-in đẹp. <br>• **Deleaf Kafé:** Không gian thoáng đãng, được giới trẻ yêu thích.</p></div>
-                <div><h4 class="font-bold text-white">Dịch vụ thuê xe tại TP.HCM:</h4><p class="text-sm">• **Gia Bảo Motobike:** Xe số từ 100k/ngày. SĐT: 0899.928.982. <br>• **Thạnh Phát:** Xe số từ 80k/ngày. SĐT: 0909.924.925.</p></div>
-            </div>
-            <div class="modal-close-btn" onclick="closeAllModals()">×</div>
-        </div>
-    </div>
-
-    <div id="modal-xe-khach" class="modal-overlay">
-        <div class="relative modal-content">
-            <h3 class="text-2xl font-bold gradient-text mb-4">Chi Tiết Di Chuyển Bằng Xe Khách</h3>
-            <div class="space-y-4 text-gray-300">
-                <div><h4 class="font-bold text-white">Phương án A: Xe chạy thẳng (Tiện lợi nhất)</h4><p class="text-sm">• **Kim Hoàn:** Giá ~110k. SĐT: 0984.693.172 <br>• **Nhà xe Bé:** Giá 90k-100k. SĐT: 0251.379.5421 <br> <em class="text-gray-400">Ưu điểm: Không cần trung chuyển. Nhược điểm: Ít chuyến, phải gọi điện đặt trước.</em></p></div>
-                <div><h4 class="font-bold text-white">Phương án B: Xe tuyến Sài Gòn - Đà Lạt (Linh hoạt)</h4><p class="text-sm">• **Phương Trang, Thành Bưởi:** Giá ~120k. Dễ dàng đặt vé qua app/website. <br><em class="text-gray-400">Nhược điểm: Phải xuống ở ngã ba Tà Lài rồi bắt taxi/xe ôm thêm ~24km.</em></p></div>
-            </div>
-            <div class="modal-close-btn" onclick="closeAllModals()">×</div>
-        </div>
-    </div>
+    <div id="modal-xe-may" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Di Chuyển Bằng Xe Máy</h3><div class="space-y-4 text-gray-300"><div><h4 class="font-bold text-white">Lộ trình đề xuất (~160km):</h4><p class="text-sm">Bình Thạnh → QL1A → Ngã ba Dầu Giây (rẽ trái) → QL20 → Ngã ba Tà Lài (rẽ trái) → Cổng VQG Cát Tiên.</p></div><div><h4 class="font-bold text-white">Điểm dừng chân (Long Khánh):</h4><p class="text-sm">• **Én Coffee:** Phong cách Hy Lạp. <br>• **Deleaf Kafé:** Không gian thoáng đãng.</p></div><div><h4 class="font-bold text-white">Dịch vụ thuê xe tại TP.HCM:</h4><p class="text-sm">• **Gia Bảo Motobike:** 0899.928.982. <br>• **Thạnh Phát:** 0909.924.925.</p></div></div><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <div id="modal-xe-khach" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Di Chuyển Bằng Xe Khách</h3><div class="space-y-4 text-gray-300"><div><h4 class="font-bold text-white">Phương án A: Xe chạy thẳng</h4><p class="text-sm">• **Kim Hoàn:** 0984.693.172 <br>• **Nhà xe Bé:** 0251.379.5421 <br> <em class="text-gray-400">Tiện lợi nhất, không cần trung chuyển.</em></p></div><div><h4 class="font-bold text-white">Phương án B: Xe tuyến Sài Gòn - Đà Lạt</h4><p class="text-sm">• **Phương Trang, Thành Bưởi:** Dễ đặt vé qua app, nhưng phải xuống ở ngã ba Tà Lài rồi bắt taxi/xe ôm thêm ~24km.</p></div></div><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
     
     <!-- Accommodation Modals -->
-    <div id="modal-green-hope" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Green Hope Lodge</h3><p class="text-gray-300">Nổi bật với các bungalow có view trực diện sông Đồng Nai. Không gian sân vườn rộng, yên tĩnh, là nơi lý tưởng để thư giãn. Đồ ăn tại nhà hàng được đánh giá "cực kỳ ngon".<br><br><strong>Phòng cho nhóm:</strong> Phòng Superior Family (5 người), Phòng Gia Đình có ban công (6 người).<br><br><em class="text-pink-400">"Phòng view sông cực thích, rất sạch sẽ... Đặc biệt, đồ ăn nấu thì cực kỳ ngon." - Trích review</em></p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-gibbon-singing" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Gibbon Singing Homestay</h3><p class="text-gray-300">Mang lại cảm giác "nhà vườn" ấm cúng. Điểm mạnh là sự nhiệt tình của gia đình chủ nhà và các món ăn "cây nhà lá vườn". Cung cấp đa dạng dịch vụ như BBQ, tour thuyền, karaoke.<br><br><strong>Phòng cho nhóm:</strong> Family Bungalow (6 người), Family Double Room (6 người).<br><br><em class="text-pink-400">"Gia đình chủ nhà dễ thương, thân thiện, BBQ ngon nhiều, rất đáng tiền." - Trích review</em></p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-forest-side" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Forest Side Ecolodge</h3><p class="text-gray-300">Vị trí không thể thuận tiện hơn – nằm ngay cạnh bến phà vào VQG. Không gian mộc mạc, hòa mình vào thiên nhiên, được quản lý bởi gia đình địa phương thân thiện. Cho phép mang theo thú cưng.<br><br><strong>Phòng cho nhóm:</strong> Mixed Dormitory Room (6 người), Family Room with Garden View (5 người).<br><br><em class="text-pink-400">"Vị trí hoàn hảo ngay cạnh cổng vào công viên... Gia đình chủ nhà ngọt ngào, hữu ích." - Trích review</em></p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <div id="modal-green-hope" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-2">Green Hope Lodge</h3><div class="space-y-2 text-gray-300 mt-4"><p>Nổi bật với các bungalow view sông Đồng Nai, không gian sân vườn rộng, yên tĩnh. Đồ ăn tại nhà hàng được đánh giá rất cao.</p><div><h4 class="font-bold text-white">Chi phí cho nhóm 5-6 người:</h4><p class="text-sm">• Phòng Superior Family / Phòng Gia Đình có ban công: <strong>800.000 - 1.200.000 VNĐ/đêm</strong></p></div></div><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <div id="modal-gibbon-singing" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-2">Gibbon Singing Homestay</h3><div class="space-y-2 text-gray-300 mt-4"><p>Mang lại cảm giác "nhà vườn" ấm cúng. Điểm mạnh là sự nhiệt tình của chủ nhà và các món ăn "cây nhà lá vườn". Cung cấp đa dạng dịch vụ như BBQ, tour thuyền.</p><div><h4 class="font-bold text-white">Chi phí cho nhóm 5-6 người:</h4><p class="text-sm">• Family Bungalow / Family Double Room: <strong>800.000 - 1.200.000 VNĐ/đêm</strong></p></div></div><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <div id="modal-forest-side" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-2">Forest Side Ecolodge</h3><div class="space-y-2 text-gray-300 mt-4"><p>Vị trí siêu thuận tiện ngay cạnh bến phà. Không gian mộc mạc, hòa mình vào thiên nhiên, được quản lý bởi gia đình địa phương thân thiện.</p><div><h4 class="font-bold text-white">Chi phí cho nhóm 5-6 người:</h4><p class="text-sm">• Mixed Dormitory Room / Family Room: <strong>600.000 - 1.000.000 VNĐ/đêm</strong></p></div></div><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
     
     <!-- Activity Modals -->
-    <div id="modal-dap-xe" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Đạp Xe Khám Phá Rừng</h3><p class="text-gray-300">Đây là hoạt động khởi động tuyệt vời để làm quen với không khí trong lành của rừng già. Cung đường bê tông và đường đất khá bằng phẳng, dễ đi.<br><br><strong>Thuê dịch vụ:</strong> Tại trung tâm VQG. Giá: ~30.000đ/giờ hoặc 150.000đ/ngày.<br><br><strong>Lộ trình gợi ý:</strong> Cây Tung cổ thụ 400 tuổi → Ghềnh Bến Cự → Cây Gõ Bác Đồng → Cây Đa Lộc Giao.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-thu-dem" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Tour Xem Thú Đêm</h3><p class="text-gray-300">Trải nghiệm độc đáo và đặc sắc nhất chỉ có tại Nam Cát Tiên. Bạn sẽ được ngồi trên xe jeep mui trần, dùng đèn pha để quan sát đời sống về đêm của các loài động vật hoang dã như nai, hươu, lợn rừng, chồn, nhím...<br><br><strong>Đăng ký & Chi phí:</strong> Tại trung tâm VQG. Giá vé khoảng 150.000 - 200.000đ/người.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-bau-sau" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Phương Án A: Trekking Bàu Sấu</h3><p class="text-gray-300">Hành trình chinh phục "trái tim" của VQG, nơi sinh sống của quần thể cá sấu Xiêm quý hiếm. Đây là một trải nghiệm mạo hiểm nhưng vô cùng đáng giá.<br><br><strong>Thử thách:</strong> Tổng hành trình 14km (9km xe jeep + 5km đi bộ). Đường đi mùa mưa rất lầy lội, trơn trượt và có nhiều vắt. Đòi hỏi thể lực tốt và sự chuẩn bị kỹ càng.<br><br><strong>Chi phí (khá cao):</strong><br>• Vé tham quan: ~250.000đ/người.<br>• Thuê xe jeep khứ hồi: ~700.000đ/chuyến.<br>• Thuê hướng dẫn viên: ~550.000đ/tour.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-kayak" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Phương Án B: Thư Giãn & Khám Phá</h3><p class="text-gray-300">Lựa chọn nhẹ nhàng hơn, phù hợp để thư giãn và tìm hiểu văn hóa bản địa.<br><br><strong>1. Chèo Kayak trên sông:</strong> Lướt nhẹ trên dòng sông Đồng Nai yên ả, tận hưởng không khí trong lành buổi sớm mai. Nhiều homestay có cung cấp dịch vụ này.<br><br><strong>2. Tham quan Làng Tà Lài:</strong> Tìm hiểu về văn hóa của người Mạ và S'tiêng, xem các nghệ nhân dệt thổ cẩm và lắng nghe những câu chuyện về cuộc sống của họ. Một trải nghiệm văn hóa sâu sắc.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <div id="modal-dap-xe" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Đạp Xe Khám Phá Rừng</h3><p class="text-gray-300">Hoạt động khởi động tuyệt vời để làm quen với không khí trong lành. Cung đường bằng phẳng, dễ đi.<br><br><strong>Thuê dịch vụ:</strong> Tại trung tâm VQG. Giá: ~30.000đ/giờ hoặc 150.000đ/ngày.<br><br><strong>Lộ trình gợi ý:</strong> Cây Tung cổ thụ → Ghềnh Bến Cự → Cây Gõ Bác Đồng → Cây Đa Lộc Giao.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <div id="modal-thu-dem" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Tour Xem Thú Đêm</h3><p class="text-gray-300">Trải nghiệm đặc sắc nhất chỉ có tại Nam Cát Tiên. Ngồi trên xe jeep mui trần, dùng đèn pha để quan sát đời sống về đêm của nai, hươu, lợn rừng...<br><br><strong>Đăng ký & Chi phí:</strong> Tại trung tâm VQG. Giá vé khoảng 150.000 - 200.000đ/người.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <div id="modal-bau-sau" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Trekking Bàu Sấu</h3><p class="text-gray-300">Hành trình chinh phục "trái tim" của VQG, nơi sinh sống của cá sấu Xiêm. Một trải nghiệm mạo hiểm nhưng vô cùng đáng giá.<br><br><strong>Thử thách:</strong> 9km xe jeep + 5km đi bộ. Đường đi mùa mưa rất lầy lội, trơn trượt và có nhiều vắt.<br><br><strong>Chi phí (khá cao):</strong> Vé ~250k, thuê xe jeep ~700k/chuyến, thuê hướng dẫn viên ~550k/tour.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <div id="modal-kayak" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Chèo Kayak & Thăm Làng Tà Lài</h3><p class="text-gray-300">Lựa chọn nhẹ nhàng hơn, phù hợp để thư giãn và tìm hiểu văn hóa bản địa.<br><br><strong>1. Chèo Kayak trên sông:</strong> Lướt nhẹ trên dòng sông Đồng Nai yên ả, tận hưởng không khí trong lành buổi sớm mai. Nhiều homestay có cung cấp dịch vụ này.<br><br><strong>2. Tham quan Làng Tà Lài:</strong> Tìm hiểu về văn hóa của người Mạ và S'tiêng, xem các nghệ nhân dệt thổ cẩm thủ công.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+
+    <!-- Hidden Gems Modals -->
+    <div id="modal-san-buom" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Săn Bướm Rừng</h3><p class="text-gray-300">Sau những cơn mưa vào tháng 7, các cung đường trekking thường có hàng ngàn con bướm đủ màu sắc tụ lại, tạo nên một khung cảnh vô cùng ảo diệu. Đây là khoảnh khắc "vàng" để có những bức ảnh để đời.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <div id="modal-binh-minh" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Bình Minh Trên Sông</h3><p class="text-gray-300">Ánh sáng vàng của buổi sớm mai trên mặt sông Đồng Nai là khoảnh khắc "vàng" cho nhiếp ảnh. Bạn có thể bắt trọn khoảnh khắc này từ ban công của homestay hoặc khi đang chèo thuyền kayak buổi sớm.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <div id="modal-vi-mo" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Thế Giới Vi Mô</h3><p class="text-gray-300">Nam Cát Tiên là thiên đường cho nhiếp ảnh macro. Hãy dành thời gian quan sát kỹ những chi tiết nhỏ trên đường đi: những loài côn trùng kỳ lạ, giọt sương trên mạng nhện, hay những cây nấm nhiều màu sắc. Một thế giới song song đầy mê hoặc mà nhiều người thường bỏ qua.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <div id="modal-ta-lai" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Văn Hóa Tà Lài</h3><p class="text-gray-300">Thay vì chỉ tham quan, hãy tìm đến làng Tà Lài để tìm hiểu về nghề dệt thổ cẩm truyền thống của người Mạ và S'tiêng. Trò chuyện với các nghệ nhân và mua một sản phẩm thủ công nhỏ làm kỷ niệm sẽ là một trải nghiệm văn hóa sâu sắc và ý nghĩa.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
 
     <script>
         const modals = document.querySelectorAll('.modal-overlay');
-
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) {
+                document.body.style.overflow = 'hidden';
                 modal.classList.add('active');
             }
         }
-
         function closeAllModals() {
+            document.body.style.overflow = '';
             modals.forEach(modal => {
                 modal.classList.remove('active');
             });
         }
-
         modals.forEach(modal => {
-            modal.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    closeAllModals();
-                }
-            });
+            modal.addEventListener('click', (event) => { if (event.target === modal) closeAllModals(); });
         });
+        document.addEventListener('keydown', (event) => { if (event.key === "Escape") closeAllModals(); });
 
         // Chart.js setup
         const chartFontColor = '#E0E0E0';
         const chartGridColor = 'rgba(255, 255, 255, 0.1)';
         const gradientColors = ['#A855F7', '#EC4899', '#F59E0B', '#3B82F6'];
-
         const donutChartCtx = document.getElementById('budgetDonutChart').getContext('2d');
         new Chart(donutChartCtx, {
             type: 'doughnut', data: { labels: ['Ăn uống', 'Vé & Dịch vụ', 'Di chuyển', 'Lưu trú'], datasets: [{ data: [550000, 310000, 200000, 170000], backgroundColor: gradientColors, borderColor: '#0D0D0D', borderWidth: 5, hoverOffset: 15 }] },
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: chartFontColor, font: { family: "'Be Vietnam Pro', sans-serif" } } }, tooltip: { callbacks: { label: (c) => `${c.label}: ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(c.parsed)}` } } }, cutout: '65%' }
         });
-
         const barChartCtx = document.getElementById('budgetBarChart').getContext('2d');
         new Chart(barChartCtx, {
             type: 'bar', data: { labels: ['Tiết kiệm', 'Tối đa'], datasets: [{ data: [1230000, 1660000], backgroundColor: ['#EC4899', '#A855F7'], borderRadius: 8, barPercentage: 0.5 }] },
