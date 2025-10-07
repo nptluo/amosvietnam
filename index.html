@@ -3,257 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infographic Tương Tác: Kế Hoạch Khám Phá Nam Cát Tiên</title>
+    <title>Báo cáo Tình hình Kinh doanh - AMOS Việt Nam</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <!--
-    DESIGN PHILOSOPHY V5: Text-Only Focus
-
-    THEME: Maintained from previous version.
-    UPDATE: Removed all image elements from modals to prevent broken links and ensure stability. The focus is now 100% on interactive text-based information.
-    
-    CONFIRMATION: NO Mermaid JS and NO SVG graphics are used. Charts by Chart.js. All pop-ups and layouts by HTML/CSS/JS.
-    -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Be Vietnam Pro', sans-serif;
-            background-color: #0D0D0D;
-            color: #E0E0E0;
-            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
         }
-        .gradient-text {
-            background: linear-gradient(90deg, #A855F7, #EC4899, #F59E0B);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text; text-fill-color: transparent;
+        .main-color {
+            color: #1F466E;
         }
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.05);
-            -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .main-bg {
+            background-color: #1F466E;
         }
-        .interactive-card {
-            cursor: pointer;
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .interactive-card:hover {
+        .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.15);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 50;
-            opacity: 0; visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
+        .clickable-card {
+            cursor: pointer;
         }
-        .modal-overlay.active {
-            opacity: 1; visibility: visible;
+        .swot-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 1rem;
         }
-        .modal-content {
-            background: #111111;
-            padding: 1.5rem; border-radius: 1.5rem;
-            width: 90%; max-width: 600px;
-            max-height: 90vh; overflow-y: auto;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transform: scale(0.9);
-            transition: transform 0.4s ease;
+        .swot-details {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4; /* Initially show 4 lines */
+            -webkit-box-orient: vertical;
+            transition: -webkit-line-clamp 0.4s ease-in-out;
         }
-        @media (min-width: 768px) {
-            .modal-content {
-                padding: 2rem;
-            }
+        .swot-details.expanded {
+            -webkit-line-clamp: 100; /* A large number to show all content */
         }
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
+        /* Modal styles */
+        #details-modal {
+            display: flex; /* Use flex instead of hidden for transitions */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .modal-close-btn {
-            position: absolute; top: 1rem; right: 1rem;
-            background: rgba(255,255,255,0.1); border-radius: 50%;
-            width: 2.5rem; height: 2.5rem;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; color: white; font-size: 1.5rem;
-            z-index: 10;
+        #details-modal.is-open {
+            opacity: 1;
+            visibility: visible;
         }
-        .timeline-item {
-            position: relative; padding-bottom: 2.5rem; padding-left: 2.5rem;
-        }
-        .timeline-dot {
-            position: absolute; left: 0; top: 5px; width: 20px; height: 20px;
-            border-radius: 50%; background: linear-gradient(45deg, #A855F7, #EC4899);
-            box-shadow: 0 0 15px #EC4899; z-index: 10;
-        }
-        .timeline-line {
-            position: absolute; left: 9px; top: 25px; bottom: 0;
-            width: 2px; background-color: rgba(255, 255, 255, 0.15);
-        }
-        .timeline-item:last-child { padding-bottom: 0; }
-        .timeline-item:last-child .timeline-line { display: none; }
-        .timeline-item h4 { cursor: pointer; }
     </style>
 </head>
-<body class="antialiased">
+<body class="text-gray-800">
 
-    <div class="container mx-auto max-w-5xl p-4 sm:p-6 md:p-8">
-
-        <header class="text-center py-16 md:py-24">
-            <h1 class="text-5xl md:text-7xl font-black gradient-text mb-6 leading-tight">Khám Phá Nam Cát Tiên</h1>
-            <p class="text-xl md:text-2xl font-light text-gray-300 max-w-3xl mx-auto">Cẩm nang tương tác cho hành trình 2 ngày 1 đêm "chữa lành" tâm hồn.</p>
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold main-color mb-2">BÁO CÁO KINH DOANH</h1>
+            <p class="text-xl text-gray-500">AMOS VIỆT NAM</p>
         </header>
 
-        <section class="py-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Chọn Phương Tiện</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glassmorphism p-6 rounded-2xl text-center interactive-card" onclick="openModal('modal-xe-may')">
-                    <p class="text-5xl mb-4">🏍️</p>
-                    <h3 class="text-2xl font-bold text-white mb-2">Xe Máy</h3>
-                    <p class="text-gray-400">Tự do chinh phục cung đường, chủ động và tiết kiệm. Nhấn để xem chi tiết lộ trình và nơi thuê xe.</p>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold main-color text-center mb-6">Kết quả Kinh doanh Tuần Trước</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="card p-6 clickable-card open-modal-btn">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Tổng giá trị đơn hàng</h3>
+                    <p class="text-4xl font-bold main-color">SGD 311,848+</p>
+                    <span class="text-sm text-blue-500 font-semibold mt-2 block">Nhấn để xem chi tiết</span>
                 </div>
-                <div class="glassmorphism p-6 rounded-2xl text-center interactive-card" onclick="openModal('modal-xe-khach')">
-                    <p class="text-5xl mb-4">🚌</p>
-                    <h3 class="text-2xl font-bold text-white mb-2">Xe Khách</h3>
-                    <p class="text-gray-400">An toàn, thoải mái, giữ trọn năng lượng khám phá. Nhấn để xem các nhà xe và cách đặt vé.</p>
+                 <div class="card p-6 clickable-card open-modal-btn">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Đơn hàng lớn nhất</h3>
+                    <p class="text-4xl font-bold main-color">SGD 279,807</p>
+                     <span class="text-sm text-blue-500 font-semibold mt-2 block">Nhấn để xem chi tiết</span>
                 </div>
-            </div>
-        </section>
-
-        <section class="py-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Nơi "Trú Ẩn" Lý Tưởng</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glassmorphism p-6 rounded-2xl text-center interactive-card" onclick="openModal('modal-green-hope')">
-                    <h3 class="text-xl font-bold text-white mb-2">Green Hope Lodge</h3>
-                    <p class="text-sm text-gray-400">View sông thơ mộng, không gian yên tĩnh. Nhấn để xem chi tiết.</p>
-                </div>
-                <div class="glassmorphism p-6 rounded-2xl text-center interactive-card" onclick="openModal('modal-gibbon-singing')">
-                    <h3 class="text-xl font-bold text-white mb-2">Gibbon Singing</h3>
-                    <p class="text-sm text-gray-400">Trải nghiệm "nhà vườn", chủ nhà thân thiện. Nhấn để xem chi tiết.</p>
-                </div>
-                <div class="glassmorphism p-6 rounded-2xl text-center interactive-card" onclick="openModal('modal-forest-side')">
-                    <h3 class="text-xl font-bold text-white mb-2">Forest Side</h3>
-                    <p class="text-sm text-gray-400">Vị trí siêu gần bến phà, giá hợp lý. Nhấn để xem chi tiết.</p>
+                <div class="card p-6 clickable-card open-modal-btn">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Số lượng cơ hội</h3>
+                    <p class="text-4xl font-bold main-color">9+</p>
+                     <span class="text-sm text-blue-500 font-semibold mt-2 block">Nhấn để xem chi tiết</span>
                 </div>
             </div>
         </section>
 
-        <section class="py-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Lịch Trình 2 Ngày 1 Đêm</h2>
-            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-x-12">
-                <div>
-                    <h3 class="text-2xl font-bold text-white mb-6">Ngày 1: Chạm Ngõ Rừng Già</h3>
-                    <div class="relative">
-                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-line"></div><h4 class="font-bold">05:30</h4><p class="text-sm text-gray-400">Xuất phát từ TP.HCM</p></div>
-                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-line"></div><h4 class="font-bold">11:00</h4><p class="text-sm text-gray-400">Đến nơi, nhận phòng & ăn trưa</p></div>
-                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-line"></div><h4 class="font-bold interactive-card" onclick="openModal('modal-dap-xe')">14:00 - Đạp xe khám phá</h4><p class="text-sm text-gray-400">Khám phá Cây Tung, Bến Cự...</p></div>
-                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-line"></div><h4 class="font-bold interactive-card" onclick="openModal('modal-thu-dem')">18:30 - Tour Xem Thú Đêm</h4><p class="text-sm text-gray-400">Trải nghiệm độc đáo nhất VQG</p></div>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold main-color text-center mb-8">Phân Tích SWOT</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <div class="flex items-center mb-3">
+                        <svg class="w-10 h-10 text-green-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <h3 class="text-xl font-bold main-color">Điểm Mạnh (Strengths)</h3>
+                    </div>
+                    <p class="swot-details text-gray-600">Có vị trí chiến lược & chuyên môn cao: Là trung tâm kinh tế, cảng biển, năng lượng của miền Nam Việt Nam, tọa lạc tại KCN Đông Xuyên, một trong những KCN lớn của tỉnh Bà Rịa – Vũng Tàu. Gần cụm cảng Cái Mép - Thị Vải là cửa ngõ quốc tế, tạo ra nhu cầu lớn về dịch vụ nâng hạ, bốc dỡ. Phát triển công nghiệp nặng: Sự hiện diện của các ngành dầu khí, điện lực, hóa dầu, thép tạo ra một thị trường ổn định và chuyên biệt cho thiết bị và dịch vụ nâng hạ. Nhu cầu nội tại cao: Nhu cầu lớn từ các ngành công nghiệp trọng điểm của tỉnh như cảng biển, logistics, đóng tàu, dầu khí, xây dựng cơ sở hạ tầng. Tập trung công nghiệp: Các khu công nghiệp lớn như Phú Mỹ, Cái Mép có các nhà máy, công trình đòi hỏi thiết bị nâng hạ và cáp thép. Lực lượng lao động tại Amos được đào tạo bài bản và có kinh nghiệm cao trong việc gia công các loại cáp thép chuyên dụng.</p>
+                    <button class="text-sm font-semibold main-color mt-2 swot-toggle">Xem thêm</button>
+                </div>
+                <div class="card p-6">
+                     <div class="flex items-center mb-3">
+                        <svg class="w-10 h-10 text-red-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
+                        <h3 class="text-xl font-bold main-color">Điểm Yếu (Weaknesses)</h3>
+                    </div>
+                    <p class="swot-details text-gray-600">Phụ thuộc vào chu kỳ kinh tế: Sản lượng công việc biến động theo tình hình xuất nhập khẩu và đầu tư công. Cạnh tranh về giá: Sự tham gia của nhiều doanh nghiệp, đặc biệt là các đơn vị nhỏ lẻ dẫn đến cạnh tranh về giá, có thể ảnh hưởng đến chất lượng dịch vụ. Nguồn cung nguyên liệu: Phụ thuộc vào nguồn thép của công ty mẹ, cáp thép nhập khẩu thường bị động về giá do phụ thuộc vào hàng nhập khẩu. Số lượng cáp cũ chiếm số lượng lớn trong kho, khó thanh lý, vốn bị ứ đọng lâu ngày ảnh hưởng đến tài chính công ty. Chiến lược kinh doanh chưa được hỗ trợ và đầu tư nghiêm túc. Triết lý kinh doanh của công ty mẹ không phù hợp với văn hóa kinh doanh tại Việt Nam.</p>
+                    <button class="text-sm font-semibold main-color mt-2 swot-toggle">Xem thêm</button>
+                </div>
+                <div class="card p-6">
+                     <div class="flex items-center mb-3">
+                         <svg class="w-10 h-10 text-blue-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path></svg>
+                        <h3 class="text-xl font-bold main-color">Cơ Hội (Opportunities)</h3>
+                    </div>
+                    <p class="swot-details text-gray-600">Sau khi thực hiện sắp xếp đơn vị hành chính cấp tỉnh, TP.HCM, Bình Dương và Bà Rịa - Vũng Tàu sẽ được sáp nhập. Đơn vị hành chính mới này dự kiến sẽ trở thành trung tâm tài chính hàng đầu Việt Nam, đồng thời đóng vai trò đầu tàu kinh tế trọng điểm phía Nam, mang lại cho Công ty nhiều cơ hội với nhu cầu cáp thép tăng cao cho các dự án: Xây dựng các khu đô thị mới, đường và cầu. Mở rộng các khu công nghiệp, cảng cạn (ICD). Tái quy hoạch các dự án năng lượng (điện gió, điện khí). Trở thành nhà cung cấp chính thức, tham gia sâu hơn vào chuỗi cung ứng của các tập đoàn lớn (cảng biển, đóng tàu, xây dựng).</p>
+                    <button class="text-sm font-semibold main-color mt-2 swot-toggle">Xem thêm</button>
+                </div>
+                <div class="card p-6">
+                     <div class="flex items-center mb-3">
+                         <svg class="w-10 h-10 text-yellow-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <h3 class="text-xl font-bold main-color">Thách Thức (Threats)</h3>
+                    </div>
+                    <p class="swot-details text-gray-600">Cạnh tranh trong nước và quốc tế: Các sản phẩm cáp thép và dịch vụ gia công trong nước và các nước lân cận (như Trung Quốc) có giá thành rẻ, quy mô lớn, cạnh tranh gay gắt. Biến động giá nguyên liệu: Giá thép và cáp thép thế giới biến động nhiều, ảnh hưởng trực tiếp đến chi phí đầu vào và lợi nhuận kinh doanh.</p>
+                    <button class="text-sm font-semibold main-color mt-2 swot-toggle">Xem thêm</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+             <h2 class="text-2xl font-bold main-color text-center mb-8">Giải Pháp Đề Xuất</h2>
+             <!-- Content is the same as before -->
+             <div class="space-y-6">
+                <div class="card p-6 md:flex items-center">
+                    <div class="md:w-1/3 text-center md:text-left mb-4 md:mb-0">
+                        <h3 class="text-xl font-bold main-color">1. Tái định vị thương hiệu</h3>
+                        <p class="text-gray-500">"Giải pháp cáp thép công nghiệp cao cấp & chuyên dụng"</p>
+                    </div>
+                    <div class="md:w-2/3 md:pl-6 text-gray-600">
+                        Xây dựng website chuyên nghiệp, đẩy mạnh marketing để đạt top 1 tìm kiếm. Tăng cường telesales và hệ thống nuôi dưỡng khách hàng tiềm năng tự động.
                     </div>
                 </div>
-                 <div>
-                    <h3 class="text-2xl font-bold text-white mb-6">Ngày 2: Hít Thở Khí Trời</h3>
-                    <div class="relative">
-                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-line"></div><h4 class="font-bold">07:00 - Lựa chọn trải nghiệm</h4><p class="text-sm text-gray-400">Nhấn vào các phương án bên dưới để xem chi tiết.</p></div>
-                        <div class="p-4 glassmorphism rounded-lg mb-4 interactive-card" onclick="openModal('modal-bau-sau')"><h5 class="font-bold text-pink-400">A: Trekking Bàu Sấu</h5><p class="text-xs text-gray-400">Mạo hiểm & đáng giá.</p></div>
-                        <div class="p-4 glassmorphism rounded-lg mb-4 interactive-card" onclick="openModal('modal-kayak')"><h5 class="font-bold text-amber-400">B: Chèo Kayak & Làng Tà Lài</h5><p class="text-xs text-gray-400">Thư giãn & khám phá văn hóa.</p></div>
-                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-line"></div><h4 class="font-bold">11:30</h4><p class="text-sm text-gray-400">Trả phòng & ăn trưa</p></div>
-                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-line"></div><h4 class="font-bold">13:30</h4><p class="text-sm text-gray-400">Lên xe trở về TP.HCM</p></div>
+                 <div class="card p-6 md:flex items-center">
+                    <div class="md:w-1/3 text-center md:text-left mb-4 md:mb-0">
+                        <h3 class="text-xl font-bold main-color">2. Tối ưu hóa giá & sản phẩm</h3>
+                         <p class="text-gray-500">Đa dạng hóa gói sản phẩm/dịch vụ</p>
+                    </div>
+                    <div class="md:w-2/3 md:pl-6 text-gray-600">
+                        Chuyển từ định giá cao sang chiến lược đa dạng hóa các phiên bản (gói Cơ bản, Cao cấp). Chủ động tìm nguồn cung để tối ưu chi phí đầu vào.
+                    </div>
+                </div>
+                 <div class="card p-6 md:flex items-center">
+                    <div class="md:w-1/3 text-center md:text-left mb-4 md:mb-0">
+                        <h3 class="text-xl font-bold main-color">3. Thiết lập chính sách hậu mãi</h3>
+                         <p class="text-gray-500">Biến khách hàng một lần thành khách hàng trung thành</p>
+                    </div>
+                    <div class="md:w-2/3 md:pl-6 text-gray-600">
+                        Kiểm tra định kỳ, cảnh báo sớm, minh bạch chính sách đổi trả và xây dựng chương trình khách hàng thân thiết để tạo sự tin tưởng cao.
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Góc Sống Ảo & Bí Mật</h2>
-             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                <div class="glassmorphism p-4 rounded-xl text-center interactive-card" onclick="openModal('modal-san-buom')">
-                    <h3 class="text-md font-bold text-white">Săn Bướm Rừng</h3>
-                </div>
-                <div class="glassmorphism p-4 rounded-xl text-center interactive-card" onclick="openModal('modal-binh-minh')">
-                    <h3 class="text-md font-bold text-white">Bình Minh Sông</h3>
-                </div>
-                 <div class="glassmorphism p-4 rounded-xl text-center interactive-card" onclick="openModal('modal-vi-mo')">
-                    <h3 class="text-md font-bold text-white">Thế Giới Vi Mô</h3>
-                </div>
-                <div class="glassmorphism p-4 rounded-xl text-center interactive-card" onclick="openModal('modal-ta-lai')">
-                    <h3 class="text-md font-bold text-white">Văn Hóa Tà Lài</h3>
-                </div>
+        <section>
+            <h2 class="text-2xl font-bold main-color text-center mb-8">Kế Hoạch Hành Động Tuần</h2>
+            <div class="card p-6 overflow-x-auto">
+                <table class="min-w-full text-left">
+                    <thead class="border-b"><tr class="main-color"><th class="p-4 font-bold">Công việc</th><th class="p-4 font-bold">Người thực hiện</th><th class="p-4 font-bold">Kết quả cần đạt</th></tr></thead>
+                    <tbody class="text-gray-700">
+                        <tr class="border-b"><td class="p-4">Tạo website công ty</td><td class="p-4">Ms. Loan (chính), Mr. Duy (kiểm soát)</td><td class="p-4">Nhận ít nhất 03 báo giá tốt nhất</td></tr>
+                        <tr class="border-b"><td class="p-4">Tạo fanpage, quảng cáo, tăng nhận diện</td><td class="p-4">Mr. Lộc (chính), Mr. Duy (kiểm soát)</td><td class="p-4">Nhận ít nhất 03 báo giá tốt nhất</td></tr>
+                        <tr class="border-b"><td class="p-4">Hoàn tất chứng nhận ISO</td><td class="p-4">Mr. Duy</td><td class="p-4">Chốt kế hoạch với công ty mẹ</td></tr>
+                        <tr class="border-b"><td class="p-4">Tìm kiếm khách hàng mới</td><td class="p-4">Ms. Loan, Mr. Lộc, Mr. Duy</td><td class="p-4">Mỗi người có ít nhất 03 khách hàng mới</td></tr>
+                        <tr><td class="p-4">Liên hệ khách hàng cũ</td><td class="p-4">Ms. Loan, Mr. Lộc, Mr. Duy</td><td class="p-4">Mỗi người liên hệ ít nhất 20 khách hàng cũ</td></tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
-        <section class="py-12 glassmorphism rounded-3xl my-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-2">Phân Tích "Hầu Bao"</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center px-6 mt-10">
-                <div class="text-center"><h3 class="text-xl font-bold mb-4">Phân Bổ Chi Phí (Tiết Kiệm)</h3><div class="chart-container"><canvas id="budgetDonutChart"></canvas></div></div>
-                <div class="text-center"><h3 class="text-xl font-bold mb-4">So Sánh 2 Kịch Bản</h3><div class="chart-container"><canvas id="budgetBarChart"></canvas></div></div>
-            </div>
-        </section>
-
-        <footer class="text-center py-16 mt-12 border-t border-white/10">
-             <h3 class="text-xl font-bold text-white mb-4">Thông Tin Hữu Ích</h3>
-             <p class="max-w-2xl mx-auto text-sm text-gray-400">Tháng 7 mùa mưa, hãy chuẩn bị đồ nhanh khô & thuốc chống vắt. Hotline VQG: (+84) 2513 669 228</p>
-             <p class="mt-8 text-xs text-gray-600">Infographic tương tác được thiết kế bởi Canvas.</p>
-        </footer>
+        <footer class="text-center mt-12 py-4 border-t"><p class="text-sm text-gray-500">&copy; AMOS VIETNAM - Báo cáo được tạo tự động</p></footer>
     </div>
 
-    <!-- MODALS -->
-    <div id="modal-xe-may" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Di Chuyển Bằng Xe Máy</h3><div class="space-y-4 text-gray-300"><div><h4 class="font-bold text-white">Lộ trình đề xuất (~160km):</h4><p class="text-sm">Bình Thạnh → QL1A → Ngã ba Dầu Giây (rẽ trái) → QL20 → Ngã ba Tà Lài (rẽ trái) → Cổng VQG Cát Tiên.</p></div><div><h4 class="font-bold text-white">Điểm dừng chân (Long Khánh):</h4><p class="text-sm">• **Én Coffee:** Phong cách Hy Lạp. <br>• **Deleaf Kafé:** Không gian thoáng đãng.</p></div><div><h4 class="font-bold text-white">Dịch vụ thuê xe tại TP.HCM:</h4><p class="text-sm">• **Gia Bảo Motobike:** 0899.928.982. <br>• **Thạnh Phát:** 0909.924.925.</p></div></div><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-xe-khach" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Di Chuyển Bằng Xe Khách</h3><div class="space-y-4 text-gray-300"><div><h4 class="font-bold text-white">Phương án A: Xe chạy thẳng</h4><p class="text-sm">• **Kim Hoàn:** 0984.693.172 <br>• **Nhà xe Bé:** 0251.379.5421 <br> <em class="text-gray-400">Tiện lợi nhất, không cần trung chuyển.</em></p></div><div><h4 class="font-bold text-white">Phương án B: Xe tuyến Sài Gòn - Đà Lạt</h4><p class="text-sm">• **Phương Trang, Thành Bưởi:** Dễ đặt vé qua app, nhưng phải xuống ở ngã ba Tà Lài rồi bắt taxi/xe ôm thêm ~24km.</p></div></div><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    
-    <!-- Accommodation Modals -->
-    <div id="modal-green-hope" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-2">Green Hope Lodge</h3><div class="space-y-2 text-gray-300 mt-4"><p>Nổi bật với các bungalow view sông Đồng Nai, không gian sân vườn rộng, yên tĩnh. Đồ ăn tại nhà hàng được đánh giá rất cao.</p><div><h4 class="font-bold text-white">Chi phí cho nhóm 5-6 người:</h4><p class="text-sm">• Phòng Superior Family / Phòng Gia Đình có ban công: <strong>800.000 - 1.200.000 VNĐ/đêm</strong></p></div></div><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-gibbon-singing" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-2">Gibbon Singing Homestay</h3><div class="space-y-2 text-gray-300 mt-4"><p>Mang lại cảm giác "nhà vườn" ấm cúng. Điểm mạnh là sự nhiệt tình của chủ nhà và các món ăn "cây nhà lá vườn". Cung cấp đa dạng dịch vụ như BBQ, tour thuyền.</p><div><h4 class="font-bold text-white">Chi phí cho nhóm 5-6 người:</h4><p class="text-sm">• Family Bungalow / Family Double Room: <strong>800.000 - 1.200.000 VNĐ/đêm</strong></p></div></div><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-forest-side" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-2">Forest Side Ecolodge</h3><div class="space-y-2 text-gray-300 mt-4"><p>Vị trí siêu thuận tiện ngay cạnh bến phà. Không gian mộc mạc, hòa mình vào thiên nhiên, được quản lý bởi gia đình địa phương thân thiện.</p><div><h4 class="font-bold text-white">Chi phí cho nhóm 5-6 người:</h4><p class="text-sm">• Mixed Dormitory Room / Family Room: <strong>600.000 - 1.000.000 VNĐ/đêm</strong></p></div></div><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    
-    <!-- Activity Modals -->
-    <div id="modal-dap-xe" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Đạp Xe Khám Phá Rừng</h3><p class="text-gray-300">Hoạt động khởi động tuyệt vời để làm quen với không khí trong lành. Cung đường bằng phẳng, dễ đi.<br><br><strong>Thuê dịch vụ:</strong> Tại trung tâm VQG. Giá: ~30.000đ/giờ hoặc 150.000đ/ngày.<br><br><strong>Lộ trình gợi ý:</strong> Cây Tung cổ thụ → Ghềnh Bến Cự → Cây Gõ Bác Đồng → Cây Đa Lộc Giao.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-thu-dem" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Tour Xem Thú Đêm</h3><p class="text-gray-300">Trải nghiệm đặc sắc nhất chỉ có tại Nam Cát Tiên. Ngồi trên xe jeep mui trần, dùng đèn pha để quan sát đời sống về đêm của nai, hươu, lợn rừng...<br><br><strong>Đăng ký & Chi phí:</strong> Tại trung tâm VQG. Giá vé khoảng 150.000 - 200.000đ/người.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-bau-sau" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Trekking Bàu Sấu</h3><p class="text-gray-300">Hành trình chinh phục "trái tim" của VQG, nơi sinh sống của cá sấu Xiêm. Một trải nghiệm mạo hiểm nhưng vô cùng đáng giá.<br><br><strong>Thử thách:</strong> 9km xe jeep + 5km đi bộ. Đường đi mùa mưa rất lầy lội, trơn trượt và có nhiều vắt.<br><br><strong>Chi phí (khá cao):</strong> Vé ~250k, thuê xe jeep ~700k/chuyến, thuê hướng dẫn viên ~550k/tour.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-kayak" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Chèo Kayak & Thăm Làng Tà Lài</h3><p class="text-gray-300">Lựa chọn nhẹ nhàng hơn, phù hợp để thư giãn và tìm hiểu văn hóa bản địa.<br><br><strong>1. Chèo Kayak trên sông:</strong> Lướt nhẹ trên dòng sông Đồng Nai yên ả, tận hưởng không khí trong lành buổi sớm mai. Nhiều homestay có cung cấp dịch vụ này.<br><br><strong>2. Tham quan Làng Tà Lài:</strong> Tìm hiểu về văn hóa của người Mạ và S'tiêng, xem các nghệ nhân dệt thổ cẩm thủ công.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+    <!-- Details Modal -->
+    <div id="details-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl p-6 max-w-3xl w-full relative transform transition-all duration-300 scale-95">
+            <button id="close-modal-btn" class="absolute top-3 right-4 text-3xl font-light text-gray-500 hover:text-gray-900">&times;</button>
+            <h3 class="text-2xl font-bold main-color mb-4">Chi tiết các cơ hội đơn hàng tuần qua</h3>
+            <div class="max-h-[70vh] overflow-y-auto pr-4 text-gray-700">
+                <ul class="list-none space-y-3">
+                    <li class="p-2 border-b"><strong>PVD Division:</strong> Bridon rope 25.4mm x 1370ft - <span class="font-semibold">SGD 15,625</span></li>
+                    <li class="p-2 border-b"><strong>Intech:</strong> Bridon rope 25mm x 137mtr - <span class="font-semibold">SGD 4,326</span></li>
+                    <li class="p-2 border-b"><strong>Vietsovpetro:</strong> 4 legged sling - <span class="font-semibold">SGD 12,090</span></li>
+                    <li class="p-2 border-b"><strong>Thien Nam Offshore:</strong> Wire rope 76mm x 1500M x 2 reels - <span class="font-semibold">SGD 279,807</span></li>
+                    <li class="p-2 border-b"><strong>Vard Vung Tau:</strong> 20mm Dia. Steel wire rope 6x36 IWRC RHOL, Grade 1960, 120 Mtr</li>
+                    <li class="p-2 border-b"><strong>Shelfdrilling:</strong> Rental of 50T Loadcell c/w remote and 02 Ea shackle 55T</li>
+                    <li class="p-2 border-b"><strong>Shelfdrilling:</strong> ROPE, WIRE, 38MM DIA (1-1/2 IN) X 150 FT, (6X36) WS IWRC</li>
+                    <li class="p-2 border-b"><strong>Alpha:</strong> Spooling job</li>
+                    <li class="p-2 border-b"><strong>McDermott:</strong> R4154 BLOCK B PROJECT - CAISSON RETAINER SLING</li>
+                    <li class="p-2"><strong>PVD Division:</strong> Shackle, Bolt Type Anchor, Model G-2130, 2-1/2IN, SWL 55Ton; Sling, Wire Rope, 52mm Dia x 5.72M Long; Sling, Wire Rope, 52mm Dia x 42.8M Long</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-    <!-- Hidden Gems Modals -->
-    <div id="modal-san-buom" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Săn Bướm Rừng</h3><p class="text-gray-300">Sau những cơn mưa vào tháng 7, các cung đường trekking thường có hàng ngàn con bướm đủ màu sắc tụ lại, tạo nên một khung cảnh vô cùng ảo diệu. Đây là khoảnh khắc "vàng" để có những bức ảnh để đời.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-binh-minh" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Bình Minh Trên Sông</h3><p class="text-gray-300">Ánh sáng vàng của buổi sớm mai trên mặt sông Đồng Nai là khoảnh khắc "vàng" cho nhiếp ảnh. Bạn có thể bắt trọn khoảnh khắc này từ ban công của homestay hoặc khi đang chèo thuyền kayak buổi sớm.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-vi-mo" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Thế Giới Vi Mô</h3><p class="text-gray-300">Nam Cát Tiên là thiên đường cho nhiếp ảnh macro. Hãy dành thời gian quan sát kỹ những chi tiết nhỏ trên đường đi: những loài côn trùng kỳ lạ, giọt sương trên mạng nhện, hay những cây nấm nhiều màu sắc. Một thế giới song song đầy mê hoặc mà nhiều người thường bỏ qua.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
-    <div id="modal-ta-lai" class="modal-overlay"><div class="relative modal-content"><h3 class="text-2xl font-bold gradient-text mb-4">Văn Hóa Tà Lài</h3><p class="text-gray-300">Thay vì chỉ tham quan, hãy tìm đến làng Tà Lài để tìm hiểu về nghề dệt thổ cẩm truyền thống của người Mạ và S'tiêng. Trò chuyện với các nghệ nhân và mua một sản phẩm thủ công nhỏ làm kỷ niệm sẽ là một trải nghiệm văn hóa sâu sắc và ý nghĩa.</p><div class="modal-close-btn" onclick="closeAllModals()">×</div></div></div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Modal logic
+        const modal = document.getElementById('details-modal');
+        const modalContent = modal.querySelector('.transform');
+        const openModalBtns = document.querySelectorAll('.open-modal-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
 
-    <script>
-        const modals = document.querySelectorAll('.modal-overlay');
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                document.body.style.overflow = 'hidden';
-                modal.classList.add('active');
+        const openModal = () => {
+            modal.classList.add('is-open');
+            setTimeout(() => modalContent.classList.remove('scale-95'), 10); // For entry animation
+        };
+
+        const closeModal = () => {
+            modalContent.classList.add('scale-95');
+            setTimeout(() => modal.classList.remove('is-open'), 300); // Match transition duration
+        };
+
+        openModalBtns.forEach(btn => btn.addEventListener('click', openModal));
+        closeModalBtn.addEventListener('click', closeModal);
+        
+        // Close modal on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
             }
-        }
-        function closeAllModals() {
-            document.body.style.overflow = '';
-            modals.forEach(modal => {
-                modal.classList.remove('active');
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+                closeModal();
+            }
+        });
+
+        // SWOT 'Read more' toggle logic
+        const swotToggles = document.querySelectorAll('.swot-toggle');
+        swotToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const details = toggle.previousElementSibling;
+                details.classList.toggle('expanded');
+                if (details.classList.contains('expanded')) {
+                    toggle.textContent = 'Thu gọn';
+                } else {
+                    toggle.textContent = 'Xem thêm';
+                }
             });
-        }
-        modals.forEach(modal => {
-            modal.addEventListener('click', (event) => { if (event.target === modal) closeAllModals(); });
         });
-        document.addEventListener('keydown', (event) => { if (event.key === "Escape") closeAllModals(); });
+    });
+</script>
 
-        // Chart.js setup
-        const chartFontColor = '#E0E0E0';
-        const chartGridColor = 'rgba(255, 255, 255, 0.1)';
-        const gradientColors = ['#A855F7', '#EC4899', '#F59E0B', '#3B82F6'];
-        const donutChartCtx = document.getElementById('budgetDonutChart').getContext('2d');
-        new Chart(donutChartCtx, {
-            type: 'doughnut', data: { labels: ['Ăn uống', 'Vé & Dịch vụ', 'Di chuyển', 'Lưu trú'], datasets: [{ data: [550000, 310000, 200000, 170000], backgroundColor: gradientColors, borderColor: '#0D0D0D', borderWidth: 5, hoverOffset: 15 }] },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: chartFontColor, font: { family: "'Be Vietnam Pro', sans-serif" } } }, tooltip: { callbacks: { label: (c) => `${c.label}: ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(c.parsed)}` } } }, cutout: '65%' }
-        });
-        const barChartCtx = document.getElementById('budgetBarChart').getContext('2d');
-        new Chart(barChartCtx, {
-            type: 'bar', data: { labels: ['Tiết kiệm', 'Tối đa'], datasets: [{ data: [1230000, 1660000], backgroundColor: ['#EC4899', '#A855F7'], borderRadius: 8, barPercentage: 0.5 }] },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `Tổng chi: ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(c.parsed.y)}` } } },
-                scales: { y: { beginAtZero: true, ticks: { color: chartFontColor, callback: (v) => v / 1000000 + 'tr' }, grid: { color: chartGridColor } }, x: { ticks: { color: chartFontColor, font: { size: 12, family: "'Be Vietnam Pro', sans-serif" } }, grid: { display: false } } }
-            }
-        });
-    </script>
 </body>
 </html>
+
