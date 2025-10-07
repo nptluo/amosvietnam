@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Báo cáo Tình hình Kinh doanh - AMOS Việt Nam</title>
+    <title>Business Performance Report - AMOS Vietnam</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,22 +32,6 @@
         .clickable-card {
             cursor: pointer;
         }
-        .swot-icon {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 1rem;
-        }
-        .swot-details {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 4; /* Initially show 4 lines */
-            -webkit-box-orient: vertical;
-            transition: -webkit-line-clamp 0.4s ease-in-out;
-        }
-        .swot-details.expanded {
-            -webkit-line-clamp: 100; /* A large number to show all content */
-        }
         /* Modal styles */
         #details-modal {
             display: flex; /* Use flex instead of hidden for transitions */
@@ -66,127 +50,143 @@
     <div class="container mx-auto p-4 md:p-8 max-w-6xl">
         
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold main-color mb-2">BÁO CÁO KINH DOANH</h1>
-            <p class="text-xl text-gray-500">AMOS VIỆT NAM</p>
+            <h1 class="text-4xl md:text-5xl font-bold main-color mb-2">BUSINESS REPORT</h1>
+            <p class="text-xl text-gray-500">AMOS VIETNAM</p>
         </header>
 
         <section class="mb-12">
-            <h2 class="text-2xl font-bold main-color text-center mb-6">Kết quả Kinh doanh Tuần Trước</h2>
+            <h2 class="text-2xl font-bold main-color text-center mb-6">Last Week's Business Results</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                 <div class="card p-6 clickable-card open-modal-btn">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Tổng giá trị đơn hàng</h3>
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Total Order Value</h3>
                     <p class="text-4xl font-bold main-color">SGD 311,848+</p>
-                    <span class="text-sm text-blue-500 font-semibold mt-2 block">Nhấn để xem chi tiết</span>
+                    <span class="text-sm text-blue-500 font-semibold mt-2 block">Click for details</span>
                 </div>
                  <div class="card p-6 clickable-card open-modal-btn">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Đơn hàng lớn nhất</h3>
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Largest Order</h3>
                     <p class="text-4xl font-bold main-color">SGD 279,807</p>
-                     <span class="text-sm text-blue-500 font-semibold mt-2 block">Nhấn để xem chi tiết</span>
+                     <span class="text-sm text-blue-500 font-semibold mt-2 block">Click for details</span>
                 </div>
                 <div class="card p-6 clickable-card open-modal-btn">
-                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Số lượng cơ hội</h3>
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Number of Opportunities</h3>
                     <p class="text-4xl font-bold main-color">9+</p>
-                     <span class="text-sm text-blue-500 font-semibold mt-2 block">Nhấn để xem chi tiết</span>
+                     <span class="text-sm text-blue-500 font-semibold mt-2 block">Click for details</span>
                 </div>
             </div>
         </section>
 
         <section class="mb-12">
-            <h2 class="text-2xl font-bold main-color text-center mb-8">Phân Tích SWOT</h2>
+            <h2 class="text-2xl font-bold main-color text-center mb-8">SWOT Analysis</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="card p-6">
                     <div class="flex items-center mb-3">
-                        <svg class="w-10 h-10 text-green-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        <h3 class="text-xl font-bold main-color">Điểm Mạnh (Strengths)</h3>
+                        <svg class="w-10 h-10 text-green-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <h3 class="text-xl font-bold main-color">Strengths</h3>
                     </div>
-                    <p class="swot-details text-gray-600">Có vị trí chiến lược & chuyên môn cao: Là trung tâm kinh tế, cảng biển, năng lượng của miền Nam Việt Nam, tọa lạc tại KCN Đông Xuyên, một trong những KCN lớn của tỉnh Bà Rịa – Vũng Tàu. Gần cụm cảng Cái Mép - Thị Vải là cửa ngõ quốc tế, tạo ra nhu cầu lớn về dịch vụ nâng hạ, bốc dỡ. Phát triển công nghiệp nặng: Sự hiện diện của các ngành dầu khí, điện lực, hóa dầu, thép tạo ra một thị trường ổn định và chuyên biệt cho thiết bị và dịch vụ nâng hạ. Nhu cầu nội tại cao: Nhu cầu lớn từ các ngành công nghiệp trọng điểm của tỉnh như cảng biển, logistics, đóng tàu, dầu khí, xây dựng cơ sở hạ tầng. Tập trung công nghiệp: Các khu công nghiệp lớn như Phú Mỹ, Cái Mép có các nhà máy, công trình đòi hỏi thiết bị nâng hạ và cáp thép. Lực lượng lao động tại Amos được đào tạo bài bản và có kinh nghiệm cao trong việc gia công các loại cáp thép chuyên dụng.</p>
-                    <button class="text-sm font-semibold main-color mt-2 swot-toggle">Xem thêm</button>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                        <li>Strategic location in a key economic hub (Dong Xuyen Industrial Park).</li>
+                        <li>Proximity to major ports (Cai Mep - Thi Vai) drives service demand.</li>
+                        <li>Stable market from heavy industries (oil & gas, power, steel).</li>
+                        <li>High internal demand from local sectors like logistics and shipbuilding.</li>
+                        <li>Well-trained and highly experienced workforce in specialized steel cables.</li>
+                    </ul>
                 </div>
                 <div class="card p-6">
                      <div class="flex items-center mb-3">
                         <svg class="w-10 h-10 text-red-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
-                        <h3 class="text-xl font-bold main-color">Điểm Yếu (Weaknesses)</h3>
+                        <h3 class="text-xl font-bold main-color">Weaknesses</h3>
                     </div>
-                    <p class="swot-details text-gray-600">Phụ thuộc vào chu kỳ kinh tế: Sản lượng công việc biến động theo tình hình xuất nhập khẩu và đầu tư công. Cạnh tranh về giá: Sự tham gia của nhiều doanh nghiệp, đặc biệt là các đơn vị nhỏ lẻ dẫn đến cạnh tranh về giá, có thể ảnh hưởng đến chất lượng dịch vụ. Nguồn cung nguyên liệu: Phụ thuộc vào nguồn thép của công ty mẹ, cáp thép nhập khẩu thường bị động về giá do phụ thuộc vào hàng nhập khẩu. Số lượng cáp cũ chiếm số lượng lớn trong kho, khó thanh lý, vốn bị ứ đọng lâu ngày ảnh hưởng đến tài chính công ty. Chiến lược kinh doanh chưa được hỗ trợ và đầu tư nghiêm túc. Triết lý kinh doanh của công ty mẹ không phù hợp với văn hóa kinh doanh tại Việt Nam.</p>
-                    <button class="text-sm font-semibold main-color mt-2 swot-toggle">Xem thêm</button>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                        <li>Vulnerable to economic cycles affecting import/export and investment.</li>
+                        <li>Intense price competition, especially from smaller businesses.</li>
+                        <li>Dependent on the parent company for raw material supply and pricing.</li>
+                        <li>Capital tied up in a large, hard-to-liquidate inventory of old cables.</li>
+                        <li>Business strategy lacks sufficient support and investment.</li>
+                        <li>Parent company's business philosophy mismatches Vietnamese business culture.</li>
+                    </ul>
                 </div>
                 <div class="card p-6">
                      <div class="flex items-center mb-3">
                          <svg class="w-10 h-10 text-blue-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path></svg>
-                        <h3 class="text-xl font-bold main-color">Cơ Hội (Opportunities)</h3>
+                        <h3 class="text-xl font-bold main-color">Opportunities</h3>
                     </div>
-                    <p class="swot-details text-gray-600">Sau khi thực hiện sắp xếp đơn vị hành chính cấp tỉnh, TP.HCM, Bình Dương và Bà Rịa - Vũng Tàu sẽ được sáp nhập. Đơn vị hành chính mới này dự kiến sẽ trở thành trung tâm tài chính hàng đầu Việt Nam, đồng thời đóng vai trò đầu tàu kinh tế trọng điểm phía Nam, mang lại cho Công ty nhiều cơ hội với nhu cầu cáp thép tăng cao cho các dự án: Xây dựng các khu đô thị mới, đường và cầu. Mở rộng các khu công nghiệp, cảng cạn (ICD). Tái quy hoạch các dự án năng lượng (điện gió, điện khí). Trở thành nhà cung cấp chính thức, tham gia sâu hơn vào chuỗi cung ứng của các tập đoàn lớn (cảng biển, đóng tàu, xây dựng).</p>
-                    <button class="text-sm font-semibold main-color mt-2 swot-toggle">Xem thêm</button>
+                     <ul class="list-disc list-inside text-gray-600 space-y-2">
+                        <li>Upcoming provincial merger (HCMC, Binh Duong, BR-VT) to create a major financial and economic hub.</li>
+                        <li>Increased demand from new infrastructure projects (urban areas, bridges, ICDs).</li>
+                        <li>Growth in re-planned energy projects (wind and gas power).</li>
+                        <li>Potential to become an official supplier for major corporations in shipbuilding, construction, etc.</li>
+                    </ul>
                 </div>
                 <div class="card p-6">
                      <div class="flex items-center mb-3">
                          <svg class="w-10 h-10 text-yellow-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                        <h3 class="text-xl font-bold main-color">Thách Thức (Threats)</h3>
+                        <h3 class="text-xl font-bold main-color">Threats</h3>
                     </div>
-                    <p class="swot-details text-gray-600">Cạnh tranh trong nước và quốc tế: Các sản phẩm cáp thép và dịch vụ gia công trong nước và các nước lân cận (như Trung Quốc) có giá thành rẻ, quy mô lớn, cạnh tranh gay gắt. Biến động giá nguyên liệu: Giá thép và cáp thép thế giới biến động nhiều, ảnh hưởng trực tiếp đến chi phí đầu vào và lợi nhuận kinh doanh.</p>
-                    <button class="text-sm font-semibold main-color mt-2 swot-toggle">Xem thêm</button>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                        <li>Fierce competition from low-priced domestic and international suppliers (e.g., China).</li>
+                        <li>Volatility in global steel and wire rope prices directly impacts input costs and profits.</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <section class="mb-12">
-             <h2 class="text-2xl font-bold main-color text-center mb-8">Giải Pháp Đề Xuất</h2>
-             <!-- Content is the same as before -->
+             <h2 class="text-2xl font-bold main-color text-center mb-8">Proposed Solutions</h2>
              <div class="space-y-6">
                 <div class="card p-6 md:flex items-center">
                     <div class="md:w-1/3 text-center md:text-left mb-4 md:mb-0">
-                        <h3 class="text-xl font-bold main-color">1. Tái định vị thương hiệu</h3>
-                        <p class="text-gray-500">"Giải pháp cáp thép công nghiệp cao cấp & chuyên dụng"</p>
+                        <h3 class="text-xl font-bold main-color">1. Reposition the Brand</h3>
+                        <p class="text-gray-500">"High-end & Specialized Industrial Steel Cable Solutions"</p>
                     </div>
                     <div class="md:w-2/3 md:pl-6 text-gray-600">
-                        Xây dựng website chuyên nghiệp, đẩy mạnh marketing để đạt top 1 tìm kiếm. Tăng cường telesales và hệ thống nuôi dưỡng khách hàng tiềm năng tự động.
+                        Build a professional website, boost marketing for top search engine rankings. Enhance telesales with an automated lead nurturing system.
                     </div>
                 </div>
                  <div class="card p-6 md:flex items-center">
                     <div class="md:w-1/3 text-center md:text-left mb-4 md:mb-0">
-                        <h3 class="text-xl font-bold main-color">2. Tối ưu hóa giá & sản phẩm</h3>
-                         <p class="text-gray-500">Đa dạng hóa gói sản phẩm/dịch vụ</p>
+                        <h3 class="text-xl font-bold main-color">2. Optimize Pricing & Products</h3>
+                         <p class="text-gray-500">Diversify product/service packages</p>
                     </div>
                     <div class="md:w-2/3 md:pl-6 text-gray-600">
-                        Chuyển từ định giá cao sang chiến lược đa dạng hóa các phiên bản (gói Cơ bản, Cao cấp). Chủ động tìm nguồn cung để tối ưu chi phí đầu vào.
+                        Shift from a single high-price strategy to varied packages (e.g., Basic, Premium). Proactively find suppliers to optimize input costs.
                     </div>
                 </div>
                  <div class="card p-6 md:flex items-center">
                     <div class="md:w-1/3 text-center md:text-left mb-4 md:mb-0">
-                        <h3 class="text-xl font-bold main-color">3. Thiết lập chính sách hậu mãi</h3>
-                         <p class="text-gray-500">Biến khách hàng một lần thành khách hàng trung thành</p>
+                        <h3 class="text-xl font-bold main-color">3. Establish After-Sales Policies</h3>
+                         <p class="text-gray-500">Turn one-time customers into loyal clients</p>
                     </div>
                     <div class="md:w-2/3 md:pl-6 text-gray-600">
-                        Kiểm tra định kỳ, cảnh báo sớm, minh bạch chính sách đổi trả và xây dựng chương trình khách hàng thân thiết để tạo sự tin tưởng cao.
+                        Implement periodic check-ups, early warnings, transparent return policies, and loyalty programs to build high levels of trust.
                     </div>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2 class="text-2xl font-bold main-color text-center mb-8">Kế Hoạch Hành Động Tuần</h2>
+            <h2 class="text-2xl font-bold main-color text-center mb-8">Weekly Action Plan</h2>
             <div class="card p-6 overflow-x-auto">
                 <table class="min-w-full text-left">
-                    <thead class="border-b"><tr class="main-color"><th class="p-4 font-bold">Công việc</th><th class="p-4 font-bold">Người thực hiện</th><th class="p-4 font-bold">Kết quả cần đạt</th></tr></thead>
+                    <thead class="border-b"><tr class="main-color"><th class="p-4 font-bold">Task</th><th class="p-4 font-bold">Assigned To</th><th class="p-4 font-bold">Required Outcome</th></tr></thead>
                     <tbody class="text-gray-700">
-                        <tr class="border-b"><td class="p-4">Tạo website công ty</td><td class="p-4">Ms. Loan (chính), Mr. Duy (kiểm soát)</td><td class="p-4">Nhận ít nhất 03 báo giá tốt nhất</td></tr>
-                        <tr class="border-b"><td class="p-4">Tạo fanpage, quảng cáo, tăng nhận diện</td><td class="p-4">Mr. Lộc (chính), Mr. Duy (kiểm soát)</td><td class="p-4">Nhận ít nhất 03 báo giá tốt nhất</td></tr>
-                        <tr class="border-b"><td class="p-4">Hoàn tất chứng nhận ISO</td><td class="p-4">Mr. Duy</td><td class="p-4">Chốt kế hoạch với công ty mẹ</td></tr>
-                        <tr class="border-b"><td class="p-4">Tìm kiếm khách hàng mới</td><td class="p-4">Ms. Loan, Mr. Lộc, Mr. Duy</td><td class="p-4">Mỗi người có ít nhất 03 khách hàng mới</td></tr>
-                        <tr><td class="p-4">Liên hệ khách hàng cũ</td><td class="p-4">Ms. Loan, Mr. Lộc, Mr. Duy</td><td class="p-4">Mỗi người liên hệ ít nhất 20 khách hàng cũ</td></tr>
+                        <tr class="border-b"><td class="p-4">Create company website</td><td class="p-4">Ms. Loan (Lead), Mr. Duy (Control)</td><td class="p-4">Get at least 3 best quotes from suppliers</td></tr>
+                        <tr class="border-b"><td class="p-4">Create fanpage, ads, increase visibility</td><td class="p-4">Mr. Loc (Lead), Mr. Duy (Control)</td><td class="p-4">Get at least 3 best quotes from suppliers</td></tr>
+                        <tr class="border-b"><td class="p-4">Finalize ISO certification</td><td class="p-4">Mr. Duy</td><td class="p-4">Finalize the plan with the parent company</td></tr>
+                        <tr class="border-b"><td class="p-4">Find new customers</td><td class="p-4">Ms. Loan, Mr. Loc, Mr. Duy</td><td class="p-4">Each member finds at least 3 new customers</td></tr>
+                        <tr><td class="p-4">Contact old customers</td><td class="p-4">Ms. Loan, Mr. Loc, Mr. Duy</td><td class="p-4">Each member contacts at least 20 old customers</td></tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <footer class="text-center mt-12 py-4 border-t"><p class="text-sm text-gray-500">&copy; AMOS VIETNAM - Báo cáo được tạo tự động</p></footer>
+        <footer class="text-center mt-12 py-4 border-t"><p class="text-sm text-gray-500">&copy; AMOS VIETNAM - Report automatically generated</p></footer>
     </div>
 
     <!-- Details Modal -->
     <div id="details-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 items-center justify-center p-4">
         <div class="bg-white rounded-lg shadow-xl p-6 max-w-3xl w-full relative transform transition-all duration-300 scale-95">
             <button id="close-modal-btn" class="absolute top-3 right-4 text-3xl font-light text-gray-500 hover:text-gray-900">&times;</button>
-            <h3 class="text-2xl font-bold main-color mb-4">Chi tiết các cơ hội đơn hàng tuần qua</h3>
+            <h3 class="text-2xl font-bold main-color mb-4">Details of Last Week's Order Opportunities</h3>
             <div class="max-h-[70vh] overflow-y-auto pr-4 text-gray-700">
                 <ul class="list-none space-y-3">
                     <li class="p-2 border-b"><strong>PVD Division:</strong> Bridon rope 25.4mm x 1370ft - <span class="font-semibold">SGD 15,625</span></li>
@@ -214,47 +214,30 @@
 
         const openModal = () => {
             modal.classList.add('is-open');
-            setTimeout(() => modalContent.classList.remove('scale-95'), 10); // For entry animation
+            setTimeout(() => modalContent.classList.remove('scale-95'), 10);
         };
 
         const closeModal = () => {
             modalContent.classList.add('scale-95');
-            setTimeout(() => modal.classList.remove('is-open'), 300); // Match transition duration
+            setTimeout(() => modal.classList.remove('is-open'), 300);
         };
 
         openModalBtns.forEach(btn => btn.addEventListener('click', openModal));
         closeModalBtn.addEventListener('click', closeModal);
         
-        // Close modal on outside click
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closeModal();
             }
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.classList.contains('is-open')) {
                 closeModal();
             }
-        });
-
-        // SWOT 'Read more' toggle logic
-        const swotToggles = document.querySelectorAll('.swot-toggle');
-        swotToggles.forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                const details = toggle.previousElementSibling;
-                details.classList.toggle('expanded');
-                if (details.classList.contains('expanded')) {
-                    toggle.textContent = 'Thu gọn';
-                } else {
-                    toggle.textContent = 'Xem thêm';
-                }
-            });
         });
     });
 </script>
 
 </body>
 </html>
-
